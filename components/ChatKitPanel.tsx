@@ -61,6 +61,7 @@ export function ChatKitPanel({
       : "pending"
   );
   const [widgetInstanceKey, setWidgetInstanceKey] = useState(0);
+  const initializationTimeoutRef = useRef<number | null>(null);
 
   const setErrorState = useCallback((updates: Partial<ErrorState>) => {
     setErrors((current) => ({ ...current, ...updates }));
@@ -69,6 +70,9 @@ export function ChatKitPanel({
   useEffect(() => {
     return () => {
       isMountedRef.current = false;
+      if (initializationTimeoutRef.current) {
+        window.clearTimeout(initializationTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -180,6 +184,20 @@ export function ChatKitPanel({
       if (isMountedRef.current) {
         if (!currentSecret) {
           setIsInitializingSession(true);
+          // Timeout après 30 secondes si la session ne se charge pas
+          if (initializationTimeoutRef.current) {
+            window.clearTimeout(initializationTimeoutRef.current);
+          }
+          initializationTimeoutRef.current = window.setTimeout(() => {
+            if (isMountedRef.current) {
+              console.error("[ChatKitPanel] Session initialization timeout");
+              setErrorState({
+                session: "Le chargement de la session prend trop de temps. Vérifiez votre connexion et vos paramètres.",
+                retryable: true,
+              });
+              setIsInitializingSession(false);
+            }
+          }, 30000);
         }
         setErrorState({ session: null, integration: null, retryable: false });
       }
@@ -239,6 +257,10 @@ export function ChatKitPanel({
 
         if (isMountedRef.current) {
           setErrorState({ session: null, integration: null });
+          if (initializationTimeoutRef.current) {
+            window.clearTimeout(initializationTimeoutRef.current);
+            initializationTimeoutRef.current = null;
+          }
         }
 
         return clientSecret;
@@ -249,12 +271,21 @@ export function ChatKitPanel({
             ? error.message
             : "Unable to start ChatKit session.";
         if (isMountedRef.current) {
-          setErrorState({ session: detail, retryable: false });
+          setErrorState({ session: detail, retryable: true });
+          setIsInitializingSession(false);
+          if (initializationTimeoutRef.current) {
+            window.clearTimeout(initializationTimeoutRef.current);
+            initializationTimeoutRef.current = null;
+          }
         }
         throw error instanceof Error ? error : new Error(detail);
       } finally {
         if (isMountedRef.current && !currentSecret) {
           setIsInitializingSession(false);
+          if (initializationTimeoutRef.current) {
+            window.clearTimeout(initializationTimeoutRef.current);
+            initializationTimeoutRef.current = null;
+          }
         }
       }
     },
@@ -340,8 +371,35 @@ export function ChatKitPanel({
       scriptStatus,
       hasError: Boolean(blockingError),
       workflowId: WORKFLOW_ID,
+      workflowConfigured: isWorkflowConfigured,
     });
   }
+
+  // Diagnostic pour aider à identifier le problème
+  useEffect(() => {
+    if (isDev) {
+      console.info("[ChatKitPanel] Diagnostic:", {
+        isInitializingSession,
+        scriptLoaded: scriptStatus === "ready",
+        workflowId: WORKFLOW_ID,
+        workflowConfigured: isWorkflowConfigured,
+        hasControl: Boolean(chatkit.control),
+        blockingError: Boolean(blockingError),
+      });
+    }
+  }, [isInitializingSession, scriptStatus, isWorkflowConfigured, chatkit.control, blockingError]);
+
+  // Vérifier si le contrôle est disponible et mettre à jour l'état
+  useEffect(() => {
+    if (chatkit.control && isInitializingSession && scriptStatus === "ready") {
+      console.info("[ChatKitPanel] Control available, setting isInitializingSession to false");
+      setIsInitializingSession(false);
+      if (initializationTimeoutRef.current) {
+        window.clearTimeout(initializationTimeoutRef.current);
+        initializationTimeoutRef.current = null;
+      }
+    }
+  }, [chatkit.control, isInitializingSession, scriptStatus]);
 
   return (
     <div className="relative pb-8 flex h-[90vh] w-full rounded-2xl flex-col overflow-hidden bg-white shadow-sm transition-colors dark:bg-slate-900">
@@ -359,10 +417,12 @@ export function ChatKitPanel({
         fallbackMessage={
           blockingError || !isInitializingSession
             ? null
-            : "Loading assistant session..."
+            : scriptStatus === "pending"
+            ? "Chargement du script ChatKit..."
+            : "Chargement de la session de l'assistant..."
         }
         onRetry={blockingError && errors.retryable ? handleResetChat : null}
-        retryLabel="Restart chat"
+        retryLabel="Réessayer"
       />
     </div>
   );

@@ -7,15 +7,26 @@ export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
 export const STARTER_PROMPTS: StartScreenPrompt[] = [
   {
-    label: "What can you do?",
-    prompt: "What can you do?",
+    label: "Comment puis-je vous aider ?",
+    prompt: "Bonjour ! Comment puis-je vous aider aujourd'hui ?",
+    icon: "circle-question",
+  },
+  {
+    label: "Expliquez vos fonctionnalités",
+    prompt: "Quelles sont vos principales fonctionnalités ?",
+    icon: "sparkle",
+  },
+  {
+    label: "Besoin d'assistance",
+    prompt: "J'ai besoin d'aide avec un problème spécifique",
     icon: "circle-question",
   },
 ];
 
-export const PLACEHOLDER_INPUT = "Ask anything...";
+export const PLACEHOLDER_INPUT = "Posez votre question...";
 
-export const GREETING = "How can I help you today?";
+export const GREETING =
+  "Bonjour ! Je suis votre assistant virtuel. Comment puis-je vous aider aujourd'hui ?";
 
 export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
   color: {
