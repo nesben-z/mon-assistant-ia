@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Assistant IA - Votre assistant virtuel intelligent",
-  description: "Obtenez des réponses instantanées grâce à notre assistant virtuel IA. Disponible 24/7 pour vous aider avec toutes vos questions.",
+  title: "IA de comparaison de document - Comparez et analysez vos documents",
+  description: "Comparez, analysez et comprenez les différences entre vos documents grâce à notre IA spécialisée. Obtenez des insights précis en quelques secondes.",
 };
 
 export default function RootLayout({

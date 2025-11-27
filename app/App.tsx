@@ -43,7 +43,7 @@ export default function App() {
                 </svg>
               </div>
               <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-                Assistant IA
+                IA de comparaison de document
               </h1>
             </div>
             <button
@@ -61,14 +61,15 @@ export default function App() {
         <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-5xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-6xl">
-              Votre Assistant IA
+              IA de comparaison de document
               <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Toujours à votre service
+                Comparez et analysez vos documents intelligemment
               </span>
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-              Obtenez des réponses instantanées à vos questions grâce à notre
-              assistant virtuel intelligent. Disponible 24/7 pour vous aider.
+              Comparez, analysez et comprenez les différences entre vos
+              documents grâce à notre IA spécialisée. Obtenez des insights
+              précis en quelques secondes.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
@@ -102,11 +103,11 @@ export default function App() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Réponses Rapides
+                Comparaison Rapide
               </h3>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                Obtenez des réponses instantanées à toutes vos questions en
-                temps réel.
+                Comparez vos documents en quelques secondes et obtenez des
+                résultats détaillés instantanément.
               </p>
             </div>
 
@@ -127,11 +128,11 @@ export default function App() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Intelligence Avancée
+                Analyse Intelligente
               </h3>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                Basé sur les dernières technologies d&apos;IA pour une
-                compréhension contextuelle.
+                Notre IA comprend le contexte et identifie les différences
+                subtiles entre vos documents.
               </p>
             </div>
 
@@ -169,10 +170,11 @@ export default function App() {
           <div className="mx-auto max-w-5xl">
             <div className="mb-6 text-center">
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-                Parlez avec votre assistant
+                Comparez vos documents
               </h2>
               <p className="mt-2 text-slate-600 dark:text-slate-300">
-                Posez vos questions et obtenez des réponses intelligentes
+                Uploadez vos documents et obtenez une analyse détaillée des
+                différences
               </p>
             </div>
             <ChatKitPanel
@@ -189,7 +191,9 @@ export default function App() {
       <footer className="mt-20 border-t border-slate-200 dark:border-slate-800">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="text-center text-sm text-slate-600 dark:text-slate-400">
-            <p>© 2024 Assistant IA. Propulsé par OpenAI ChatKit.</p>
+            <p>
+              © 2024 IA de comparaison de document. Propulsé par OpenAI ChatKit.
+            </p>
           </div>
         </div>
       </footer>

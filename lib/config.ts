@@ -7,26 +7,27 @@ export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
 export const STARTER_PROMPTS: StartScreenPrompt[] = [
   {
-    label: "Comment puis-je vous aider ?",
-    prompt: "Bonjour ! Comment puis-je vous aider aujourd'hui ?",
+    label: "Comment comparer des documents ?",
+    prompt: "Comment puis-je comparer deux documents avec vous ?",
     icon: "circle-question",
   },
   {
     label: "Expliquez vos fonctionnalités",
-    prompt: "Quelles sont vos principales fonctionnalités ?",
+    prompt: "Quelles sont vos fonctionnalités de comparaison de documents ?",
     icon: "sparkle",
   },
   {
-    label: "Besoin d'assistance",
-    prompt: "J'ai besoin d'aide avec un problème spécifique",
+    label: "Types de documents supportés",
+    prompt: "Quels types de documents puis-je comparer ?",
     icon: "circle-question",
   },
 ];
 
-export const PLACEHOLDER_INPUT = "Posez votre question...";
+export const PLACEHOLDER_INPUT =
+  "Posez votre question sur la comparaison de documents...";
 
 export const GREETING =
-  "Bonjour ! Je suis votre assistant virtuel. Comment puis-je vous aider aujourd'hui ?";
+  "Bonjour ! Je suis votre IA de comparaison de documents. Uploadez vos documents et je vous aiderai à les comparer et analyser les différences.";
 
 export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
   color: {
