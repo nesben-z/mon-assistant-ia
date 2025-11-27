@@ -419,7 +419,7 @@ export function ChatKitPanel({
             ? null
             : scriptStatus === "pending"
             ? "Chargement du script ChatKit..."
-            : "Chargement de la session de l'assistant..."
+            : "Chargement de la session de l&apos;assistant..."
         }
         onRetry={blockingError && errors.retryable ? handleResetChat : null}
         retryLabel="Réessayer"
