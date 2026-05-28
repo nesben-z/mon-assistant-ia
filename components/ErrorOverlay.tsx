@@ -26,18 +26,18 @@ export function ErrorOverlay({
   }
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-10 flex h-full w-full flex-col justify-center rounded-[inherit] bg-white/85 p-6 text-center backdrop-blur dark:bg-slate-900/90">
-      <div className="pointer-events-auto mx-auto w-full max-w-md rounded-xl bg-white px-6 py-4 text-lg font-medium text-slate-700 dark:bg-transparent dark:text-slate-100">
+    <div className="pointer-events-none absolute inset-0 z-10 flex h-full w-full flex-col justify-center rounded-[inherit] bg-[#fbfcfa]/88 p-6 text-center backdrop-blur-xl">
+      <div className="pointer-events-auto mx-auto w-full max-w-md rounded-lg border border-[#dfe7e2] bg-white px-6 py-5 text-base font-medium text-[#263c37] shadow-[0_18px_44px_rgba(21,35,33,0.10)]">
         <div className="mb-2">{content}</div>
         {error && (
-          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-2 text-sm leading-6 text-[#6a7973]">
             Vérifiez la console du navigateur (F12) pour plus de détails.
           </p>
         )}
         {error && onRetry ? (
           <button
             type="button"
-            className="mt-4 inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-none transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+            className="mt-4 inline-flex h-10 items-center justify-center rounded-md bg-[#123d37] px-4 text-sm font-semibold text-white shadow-none transition hover:bg-[#0f302c] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2f7669] focus-visible:ring-offset-2"
             onClick={onRetry}
           >
             {retryLabel ?? "Réessayer"}

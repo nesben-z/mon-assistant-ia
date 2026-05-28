@@ -402,7 +402,7 @@ export function ChatKitPanel({
   }, [chatkit.control, isInitializingSession, scriptStatus]);
 
   return (
-    <div className="relative pb-8 flex h-[90vh] w-full rounded-2xl flex-col overflow-hidden bg-white shadow-sm transition-colors dark:bg-slate-900">
+    <div className="relative flex h-full min-h-[600px] w-full flex-col overflow-hidden rounded-lg border border-[#dfe7e2] bg-[#fbfcfa] transition-colors">
       <ChatKit
         key={widgetInstanceKey}
         control={chatkit.control}
